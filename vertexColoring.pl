@@ -59,15 +59,13 @@ colorVertex([FirstEle|_], X, ColoredVertex) :-
 checkNeighbours([], _, _, _).
 checkNeighbours([H|T], Neighbours, X, Color) :-
     % check if current color is valid
-    isColorValid([H-Color], Color, X, Neighbours, T),
+    isColorValid([H-Color], Color, X),
     % recursive call
     checkNeighbours(T, Neighbours, X, Color).
 
-isColorValid([H-Color], Color, X, Neighbours, T) :-
+isColorValid([H-Color], Color, X) :-
     % check if vertex has already been colored
-    \+ member([H-Color], X) ;
-    % if it has, pick next color and return all neighbours as T
-    (	color(Color), T = Neighbours	).
+    \+ member([H-Color], X).
 
 % get first element of a list
 firstEle([H|_], H).
